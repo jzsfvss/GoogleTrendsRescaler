@@ -1,5 +1,5 @@
 #_________________________________________________________________________________________
-# Package name		Google Trends Rescaler
+# Package			Google Trends Rescaler
 # Author			József Vass <jozsef.vass@outlook.com, jzsfvss@gmail.com>
 # Language			Python
 # License			GNU General Public License v3.0
