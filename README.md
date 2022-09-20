@@ -73,9 +73,9 @@ My solution has two main steps, but the technique is the same: interpolate the h
 <u>Steps</u>:
 1. *Realignment*: move all data points to the midpoint of their respective time intervals, which is most representative of that value.
 2. *Interpolation*: The monthly data is provided by Google as fully-consistent across all years. We interpolate it at the realigned timestamps of the weekly data. I used the `scipy.interpolate.PchipInterpolator` function (Piecewise Cubic Hermite Interpolating Polynomial – it avoids overshoots and can accurately interpolate flat parts), but included other interpolators as well in my comments on the code.
-3. *Rescaling*: The weekly data is only self-consistent within each year. So taking the data for each year, we set up the least-squares matrix equation:
-&emsp;&emsp;[ weekly_data, ones ] &times; coefficients = interpolated_monthly_data
-and solve for the coefficients (a, b) using `numpy.linalg.lstsq`. Then compute:
+3. *Rescaling*: The weekly data is only self-consistent within each year. So taking the data for each year, we set up the least-squares matrix equation:<br />
+&emsp;&emsp;[ weekly_data, ones ] &times; coefficients = interpolated_monthly_data<br />
+and solve for the coefficients (a, b) using `numpy.linalg.lstsq`. Then compute:<br />
 &emsp;&emsp;rescaled_weekly_data = a &times; weekly_data + b.
 4. We take the same approach for the hourly data within each week. We interpolate the rescaled weekly data (consistent over all years) at the timestamps of the hourly data, then for each week we compute the scaling coefficients, rescale the hourly data, then concatenate it for all weeks.
 5. Re-associate again the resulting hourly values with the start of each hour, then export the data.
